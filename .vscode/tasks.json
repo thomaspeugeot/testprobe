@@ -10,7 +10,6 @@
 			"command": "gongc",
 			"group": "build",
 			"args": [
-				"-skipGoModCommands",
 				"-level1",
 				"-skipStager=false",
 				"a/go/models"
@@ -41,7 +40,6 @@
 			"command": "gongc",
 			"group": "build",
 			"args": [
-				"-skipGoModCommands",
 				"-level1",
 				"-skipStager=false",
 				"b/go/models"
