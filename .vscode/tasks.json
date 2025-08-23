@@ -16,5 +16,52 @@
 				"a/go/models"
 			]
 		},
+		{
+			"label": "01 - go run a",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/a/go/cmd/a"
+			},
+			"command": "go",
+			"args": [
+				"run",
+				"main.go",
+				"--",
+				"-unmarshallFromCode=data/stage.go",
+				"-marshallOnCommit=data/stage.go"
+			],
+			"group": "build"
+		},
+		{
+			"label": "01 - gongc b",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-skipGoModCommands",
+				"-level1",
+				"-skipStager=false",
+				"b/go/models"
+			]
+		},
+		{
+			"label": "01 - go run b",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}/b/go/cmd/b"
+			},
+			"command": "go",
+			"args": [
+				"run",
+				"main.go",
+				"--",
+				"-unmarshallFromCode=data/stage.go",
+				"-marshallOnCommit=data/stage.go"
+			],
+			"group": "build"
+		},
 	]
 }
