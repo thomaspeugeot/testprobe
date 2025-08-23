@@ -12,7 +12,7 @@
 			"args": [
 				"-skipGoModCommands",
 				"-level1",
-				"-skipStage=false",
+				"-skipStager=false",
 				"a/go/models"
 			]
 		},
