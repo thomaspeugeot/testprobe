@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "01 - gongc a",
+			"type": "shell",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"command": "gongc",
+			"group": "build",
+			"args": [
+				"-skipGoModCommands",
+				"-level1",
+				"-skipStage=false",
+				"a/go/models"
+			]
+		},
+	]
+}
