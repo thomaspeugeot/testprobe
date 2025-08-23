@@ -1,0 +1,1 @@
+gongc -level1 -skipStager=false a/go/models
