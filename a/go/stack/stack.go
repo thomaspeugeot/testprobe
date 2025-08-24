@@ -9,7 +9,6 @@ import (
 
 	"github.com/thomaspeugeot/testprobe/a/go/fullstack"
 	"github.com/thomaspeugeot/testprobe/a/go/models"
-	"github.com/thomaspeugeot/testprobe/a/go/orm"
 	"github.com/thomaspeugeot/testprobe/a/go/probe"
 
 	a_go "github.com/thomaspeugeot/testprobe/a/go"
@@ -48,9 +47,8 @@ func (impl *BeforeCommitImplementation) BeforeCommit(stage *models.Stage) {
 }
 
 type Stack struct {
-	Probe    *probe.Probe
-	Stage    *models.Stage
-	BackRepo *orm.BackRepoStruct
+	Probe *probe.Probe
+	Stage *models.Stage
 
 	hook *BeforeCommitImplementation
 }
@@ -101,17 +99,15 @@ func NewStack(
 
 	stack = new(Stack)
 
-	var backRepo *orm.BackRepoStruct
 	var stage *models.Stage
 
 	if dbFileName == "" {
-		stage, backRepo = fullstack.NewStackInstance(r, stackPath)
+		stage = fullstack.NewStackInstance(r, stackPath)
 	} else {
-		stage, backRepo = fullstack.NewStackInstance(r, stackPath, dbFileName)
+		stage = fullstack.NewStackInstance(r, stackPath, dbFileName)
 	}
 
 	stack.Stage = stage
-	stack.BackRepo = backRepo
 
 	if unmarshallFromCode != "" {
 		stage.Checkout()
@@ -141,7 +137,7 @@ func NewStack(
 	if withProbe {
 		// if the application edits the diagrams via the probe, it is surmised
 		// that the application is launched from "go/cmd/<appl>/". Therefore, to reach
-		// "go/diagrams/diagrams.go", the path is "../../diagrams/diagrams.go"	
+		// "go/diagrams/diagrams.go", the path is "../../diagrams/diagrams.go"
 		stack.Probe = probe.NewProbe(
 			r,
 			a_go.GoModelsDir,

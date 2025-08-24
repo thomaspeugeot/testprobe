@@ -7,12 +7,11 @@ import (
 	"os"
 	"strings"
 
+	"github.com/fullstack-lang/gong/go/orm"
+	b_go "github.com/thomaspeugeot/testprobe/b/go"
 	"github.com/thomaspeugeot/testprobe/b/go/fullstack"
 	"github.com/thomaspeugeot/testprobe/b/go/models"
-	"github.com/thomaspeugeot/testprobe/b/go/orm"
 	"github.com/thomaspeugeot/testprobe/b/go/probe"
-
-	b_go "github.com/thomaspeugeot/testprobe/b/go"
 
 	"github.com/gin-gonic/gin"
 )
@@ -105,9 +104,9 @@ func NewStack(
 	var stage *models.Stage
 
 	if dbFileName == "" {
-		stage, backRepo = fullstack.NewStackInstance(r, stackPath)
+		stage = fullstack.NewStackInstance(r, stackPath)
 	} else {
-		stage, backRepo = fullstack.NewStackInstance(r, stackPath, dbFileName)
+		stage = fullstack.NewStackInstance(r, stackPath, dbFileName)
 	}
 
 	stack.Stage = stage
@@ -141,7 +140,7 @@ func NewStack(
 	if withProbe {
 		// if the application edits the diagrams via the probe, it is surmised
 		// that the application is launched from "go/cmd/<appl>/". Therefore, to reach
-		// "go/diagrams/diagrams.go", the path is "../../diagrams/diagrams.go"	
+		// "go/diagrams/diagrams.go", the path is "../../diagrams/diagrams.go"
 		stack.Probe = probe.NewProbe(
 			r,
 			b_go.GoModelsDir,
